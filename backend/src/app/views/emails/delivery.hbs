@@ -1,0 +1,24 @@
+<strong>Olá, {{deliveryman}}</strong>
+
+<p>Foi cadastrada uma nova encomenda em seu nome, confira os detalhes abaixo:</p>
+<p>
+  <strong>Dados da entrega:</strong><br />
+
+  <br />
+  <strong>Cliente: </strong> <br />
+
+  {{ recipient }} <br />
+
+  <strong>Dados da encomenda: </strong> <br />
+
+  ID: {{ delivery_id }} - "{{ product }}" <br />
+
+  <strong>Endereço para a entrega: </strong> <br />
+
+  {{ address.rua}}, {{ address.numero }}, {{ address.complemento}},  {{ address.cidade }}/{{ estado }}, CEP: {{ address.cep}}.<br />
+
+  <br />
+  <small>A encomenda já está disponível para retirada.</small>
+</p>
+
+

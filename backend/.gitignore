@@ -1,0 +1,8 @@
+/backend/node_modules/**/*
+node_modules/**/*
+
+/backend/tmp/**/*
+tmp/**/*
+
+# macOS
+.DS_Store

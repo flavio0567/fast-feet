@@ -1,0 +1,22 @@
+<strong>Olá, {{deliveryman}}</strong>
+
+<p>Uma encomenda em seu nome foi CANCELADA, confira os detalhes abaixo:</p>
+<p>
+  <strong>Dados da entrega:</strong><br />
+
+  <br />
+  <strong>Cliente: </strong> <br />
+
+  {{ recipient }} <br />
+
+  <strong>Dados da encomenda: </strong> <br />
+
+  ID: {{ delivery_id }} - "{{ product }}" <br />
+
+  <strong>Endereço para a entrega: </strong> <br />
+
+  {{ address.rua}}, {{ address.numero }}, {{ address.complemento}},  {{ address.cidade }}/{{ estado }}, CEP: {{ address.cep}}.<br />
+
+  <br />
+  <small>Esta encomenda foi CANCELADA e não está mais disponível para entrega.</small>
+</p>
