@@ -12,7 +12,9 @@ class DeliverymanController {
     const { id } = req.params;
     const { page = 1 } = req.headers;
     const { delivered, q } = req.query;
+
     let deliveries;
+
     let deliveryman;
     /*  retornar as encomendas atribuidas ao Deliveryman, que não estejam
      *  entregues ou canceladas;  delivered = true */
@@ -42,17 +44,18 @@ class DeliverymanController {
             [Op.iLike]: `%${q}%`,
           },
           deliveryman: true,
-        }
+        },
       });
 
       return res.json(deliveryman);
     }
     /*
-     *  retornar lista de todos os Deliveryman
+     *  retornar um Deliveryman específico
      */
     deliveryman = await User.findAll({
       where: {
-        deliveryman: true
+        deliveryman: true,
+        id,
       },
       limit: 5,
       offset: (page - 1) * 5,
