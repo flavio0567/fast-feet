@@ -15,33 +15,28 @@ import SignatureController from './app/controllers/SignatureController';
 
 import Log from './app/middlewares/Log';
 import SessionStore from './app/middlewares/validators/SessionStore';
-import UserStore from './app/middlewares/validators/UserStore';
-import UserUpdate from './app/middlewares/validators/UserUpdate';
+// import UserStore from './app/middlewares/validators/UserStore';
+// import UserUpdate from './app/middlewares/validators/UserUpdate';
 import DeliveryStore from './app/middlewares/validators/DeliveryStore';
 import DeliveryUpdate from './app/middlewares/validators/DeliveryUpdate';
 import RecipientStore from './app/middlewares/validators/RecipientStore';
 import DeliverymanStore from './app/middlewares/validators/DeliverymanStore';
 import DeliverymanUpdate from './app/middlewares/validators/DeliverymanUpdate';
 import DeliverymanDelete from './app/middlewares/validators/DeliverymanDelete';
-import DeliveryProblemStore from
-  './app/middlewares/validators/DeliveryProblemStore';
+import DeliveryProblemStore from './app/middlewares/validators/DeliveryProblemStore';
 
 const routes = new Router();
 
 const upload = multer(multerConfig);
 
 routes.post('/sessions', Log, SessionStore, SessionController.store);
-
-/*
- * Admin actions
- */
+routes.get('/deliveryman/:id/deliveries', Log, DeliverymanController.index);
+routes.get('/users', Log, UserController.index);
 
 routes.use(authMiddleware);
-
-routes.get('/users', Log, UserController.index);
-routes.post('/users', Log, UserStore, UserController.store);
-routes.post('/users', Log, UserUpdate, UserController.store);
 /*
+ * Admin actions
+ *
  * Recipients
  */
 routes.get('/recipients', Log, RecipientController.index);
@@ -50,7 +45,6 @@ routes.post('/recipients', Log, RecipientStore, RecipientController.store);
 /*
  * Deliverymen
  */
-routes.get('/deliveryman/:id/deliveries', Log, DeliverymanController.index);
 routes.post('/deliveryman', Log, DeliverymanStore, DeliverymanController.store);
 routes.put(
   '/deliveryman/:id',
@@ -76,7 +70,8 @@ routes.put('/delivery/:id', Log, DeliveryUpdate, DeliveryController.update);
  * Delivery problems
  */
 routes.get('/delivery/:id/problems', Log, DeliveryProblemController.index);
-routes.post('/delivery/:id/problems',
+routes.post(
+  '/delivery/:id/problems',
   Log,
   DeliveryProblemStore,
   DeliveryProblemController.store
@@ -92,7 +87,8 @@ routes.delete(
  */
 routes.post('/avatar', upload.single('file'), Log, AvatarController.store);
 routes.post(
-  '/signature/:id/deliveries', upload.single('file'),
+  '/signature/:id/deliveries',
+  upload.single('file'),
   Log,
   SignatureController.store
 );

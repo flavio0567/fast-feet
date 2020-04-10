@@ -3,7 +3,8 @@ import User from '../models/User';
 class UserController {
   async index(req, res) {
     try {
-      const users = await User.findAll();
+      const { id } = req.query;
+      const users = await User.findOne({ where: { id } });
 
       return res.json(users);
     } catch (err) {
