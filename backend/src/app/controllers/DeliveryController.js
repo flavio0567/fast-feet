@@ -13,7 +13,7 @@ class DeliveryController {
         where: {
           product: {
             [Op.iLike]: `%${q}%`,
-          }
+          },
         },
       });
 
@@ -43,9 +43,7 @@ class DeliveryController {
   async update(req, res) {
     const { id } = req.params;
 
-    const delivery = await Delivery.update(req.body,
-      { where: { id }}
-    );
+    const delivery = await Delivery.update(req.body, { where: { id } });
 
     return res.json(delivery);
   }

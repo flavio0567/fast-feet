@@ -7,7 +7,13 @@ import DeliveryCancellationMail from '../jobs/DeliveryCancellationMail';
 import Queue from '../../lib/Queue';
 
 class SendEmailToDeliveryman {
-  async run({ deliveryman_id, recipient_id, delivery_id, product, identifier }) {
+  async run({
+    deliveryman_id,
+    recipient_id,
+    delivery_id,
+    product,
+    identifier,
+  }) {
     const deliveryman = await User.findByPk(deliveryman_id);
 
     const recipient = await User.findByPk(recipient_id);

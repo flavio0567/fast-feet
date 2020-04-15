@@ -1,8 +1,7 @@
 import Delivery from '../models/Delivery';
 import DeliveryProblem from '../models/DeliveryProblem';
 
-import SendEmailToDeliverymanService from
-  '../services/SendEmailToDeliverymanService';
+import SendEmailToDeliverymanService from '../services/SendEmailToDeliverymanService';
 
 class DeliveryProblemController {
   async index(req, res) {
@@ -12,7 +11,7 @@ class DeliveryProblemController {
     const { page = 1, list } = req.query;
 
     if (list) {
-      const { count, rows } = await DeliveryProblem.findAndCountAll(
+      const problems = await DeliveryProblem.findAndCountAll(
         {
           order: [['id', 'DESC']],
           attributes: ['id', 'delivery_id', 'description'],
@@ -20,21 +19,20 @@ class DeliveryProblemController {
           offset: (page - 1) * 5,
         },
         {
-          where: { id }
+          where: { id },
         }
       );
 
-      return res.json({ count, rows });
-    };
+      return res.json(problems);
+    }
 
     /* req.query=!list : returns problems for an specific Delivery */
-    const deilveryProblems = await DeliveryProblem.findAll(
-      {
-        attributes: ['id', 'delivery_id', 'description'],
-        limit: 5,
-        offset: (page - 1) * 5,
-        where: { delivery_id: id }
-      });
+    const deilveryProblems = await DeliveryProblem.findAll({
+      attributes: ['id', 'delivery_id', 'description'],
+      limit: 5,
+      offset: (page - 1) * 5,
+      where: { delivery_id: id },
+    });
 
     return res.json(deilveryProblems);
   }
@@ -44,7 +42,7 @@ class DeliveryProblemController {
 
     const { description } = req.body;
     /* Check if delivery exists  */
-    const delivery = await Delivery.findOne({ where: {id} });
+    const delivery = await Delivery.findOne({ where: { id } });
 
     if (!delivery) {
       return res.status(400).json({ error: 'Delivery not found.' });

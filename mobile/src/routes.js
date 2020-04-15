@@ -1,20 +1,26 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
 
 import Logon from './pages/Logon';
 
-import Delivery from './pages/Delivery';
+import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Detail from './pages/Detail';
+
+import DeliveryList from './components/DeliveryList';
+import DeliveredList from './components/DeliveredList';
 
 export default (isSigned = false) =>
   createAppContainer(
     createSwitchNavigator({
       Sign: createSwitchNavigator({
         Logon,
+        DeliveryList,
+        DeliveredList,
+        Detail,
       }),
       App: createBottomTabNavigator({
-        Delivery,
+        Dashboard,
         Profile,
       }, {
         tabBarOptions: {
