@@ -10,7 +10,7 @@ import DeliveryCloseService from '../services/DeliveryCloseService';
 class DeliverymanController {
   async index(req, res) {
     const { id } = req.params;
-    const { page = 1 } = req.headers;
+    const { page = 1 } = req.query;
     const { delivered, q } = req.query;
 
     let deliveries;
@@ -31,6 +31,7 @@ class DeliverymanController {
           page,
         });
       }
+      res.header('X-Total-Count', deliveries.count);
 
       return res.json(deliveries);
     }
@@ -101,7 +102,7 @@ class DeliverymanController {
           deliveryman_id: id,
           start_date,
           end_date,
-          delivery_id
+          delivery_id,
         });
 
         if (withdrawalDelivery.error) {
@@ -123,7 +124,7 @@ class DeliverymanController {
         }
 
         break;
-      default:
+      case 3:
         /* alterar dados do entregador */
         const { email } = req.body;
 
@@ -134,6 +135,8 @@ class DeliverymanController {
         }
 
         await User.update(req.body, { where: { id: user.id } });
+        break;
+      default:
     }
     return res.status(200).json();
   }

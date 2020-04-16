@@ -13,6 +13,8 @@ function Input({ style, icon, ...rest }, ref) {
   );
 }
 
+export default forwardRef(Input);
+
 Input.propTypes = {
   // icon: PropTypes.string,
   syle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -23,4 +25,4 @@ Input.defaultProps = {
   style: {},
 };
 
-export default forwardRef(Input);
+

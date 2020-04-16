@@ -31,6 +31,7 @@ class User extends Model {
     this.belongsTo(models.File, { forenignKey: 'avatar_id', as: 'avatar' });
   }
 
+  // eslint-disable-next-line no-dupe-class-members
   static associate(models) {
     this.hasOne(models.Recipient, { forenignKey: 'id', as: 'user' });
   }

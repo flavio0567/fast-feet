@@ -15,7 +15,7 @@ class SignatureService {
     });
 
     if (error) {
-      return ({ error })
+      return { error };
     }
 
     const file = await File.create({
@@ -24,7 +24,6 @@ class SignatureService {
     });
 
     return file.id;
-
   }
 }
 

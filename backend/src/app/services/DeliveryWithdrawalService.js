@@ -1,9 +1,10 @@
 import { Op } from 'sequelize';
-const { Joi } = require('celebrate');
 
 import { startOfDay, endOfDay, format, startOfHour } from 'date-fns';
 
 import Delivery from '../models/Delivery';
+
+const { Joi } = require('celebrate');
 
 class DeliveryWithDrawalService {
   async run({ deliveryman_id, start_date, delivery_id }) {
@@ -13,10 +14,14 @@ class DeliveryWithDrawalService {
       start_date: Joi.date().required(),
     });
 
-    const { error } = await schema.validate({ deliveryman_id, start_date, delivery_id });
+    const { error } = await schema.validate({
+      deliveryman_id,
+      start_date,
+      delivery_id,
+    });
 
     if (error) {
-      return ({ error })
+      return { error };
     }
     /* O entregador só pode fazer 5 retiradas por dia */
     const today = new Date();
@@ -36,11 +41,7 @@ class DeliveryWithDrawalService {
     });
 
     if (deliveries > 5) {
-      error = {
-        deliveries,
-        error: 'Exceed number of deliveries in one day',
-      };
-      return error;
+      return { deliveries, error: 'Exceed number of deliveries in one day' };
     }
 
     /* as retiradas só podem ser feitas entre as 08:00 e 18:00h. */
@@ -55,16 +56,15 @@ class DeliveryWithDrawalService {
     }
 
     if (Number(hr) < 8 && Number(hr) > 18) {
-      error = {
+      return {
         deliveries,
         error: 'Withdrawn only allowed between 08:00 and 18:00.',
       };
-      return error;
     }
 
     const delivery = await Delivery.update(
-      {start_date},
-      {where: {id: delivery_id}}
+      { start_date },
+      { where: { id: delivery_id } }
     );
 
     return delivery;

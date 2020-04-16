@@ -9,7 +9,10 @@ import { logonRequest } from '~/store/modules/auth/actions';
 
 import { Container, Form, FormInput, SubmitButton } from './styles';
 
-export default function Logon() {
+export default function Logon({ props }) {
+  console.tron.log('logon', props)
+
+
   const dispatch = useDispatch();
   const deliveryman_idRef = useRef();
 

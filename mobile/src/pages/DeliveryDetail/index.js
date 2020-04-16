@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Button, Text } from 'react-native';
 
 import { Container } from './styles';
 
-export default function Profile() {
+export default function Detail({ navigation }) {
   return (
     <Container>
-      <Text>Profile</Text>
+
     </Container>
   );
 }
