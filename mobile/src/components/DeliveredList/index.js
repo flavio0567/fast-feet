@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-
+import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { TouchableOpacity, View, Image } from 'react-native';
 
@@ -19,6 +19,7 @@ import {
 } from './styles';
 
 export default function DeliveredList({ data }) {
+  const navigation = useNavigation();
   const dateFormatted = useMemo(
     () => format(new Date(data.end_date), "dd/MM/y"),
   );
@@ -53,7 +54,7 @@ export default function DeliveredList({ data }) {
         <PointText>{data.recipient.user.cidade}</PointText>
         </View>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('DeliveryDetail', { data }) }>
         <DetailText>Ver detalhes</DetailText>
         </TouchableOpacity>
       </SelectDetail>

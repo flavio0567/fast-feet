@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, View } from 'react-native';
 
@@ -24,7 +24,7 @@ import {
 } from './styles';
 
 export default function Dashboard() {
-  const [delivered, setDelivered] = useState(false);
+  const [isDelivered, setDelivered] = useState(false);
   const dispatch = useDispatch();
 
   const { id, name } = useSelector(state => state.auth.user);
@@ -52,23 +52,18 @@ export default function Dashboard() {
       <SelectOption>
         <TextLine>Entregas</TextLine>
         <SignLink onPress={() => setDelivered(false)}>
-          <DeliveryText activyOpacity={delivered}>Pendentes</DeliveryText>
+          <DeliveryText activyOpacity={isDelivered}>Pendentes</DeliveryText>
         </SignLink>
         <SignLink onPress={() => setDelivered(true)}>
-          <DeliveredText activyOpacity={delivered}>Entregues</DeliveredText>
+          <DeliveredText activyOpacity={isDelivered}>Entregues</DeliveredText>
         </SignLink>
       </SelectOption>
 
       <View>{
-           !delivered
-           ? <Delivery data={id}/>
+           !isDelivered
+           ? <Delivery data={id} />
            : <Delivered data={id}/> }
       </View>
     </Container>
   );
-}
-
-Dashboard.navigationOptions = {
-  tabBarLabel: 'Entregas',
-  tabBarIcon: ({ tintColor }) => <Icon name="format-align-justify" size={20} color={tintColor} />
 }

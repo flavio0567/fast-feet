@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   margin-top:10px;
-  /* margin-bottom: 15px;
-  padding: 10px; */
-  /* border-radius: 1px;
-  border: #eee; */
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 1px;
+  border: #eee;
 `;
 
 export const Tracking = styled.View`

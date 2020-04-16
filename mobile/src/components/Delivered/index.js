@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
-import api from '../../services/api';
+import api from '~/services/api';
 
 import DeliveredList from '~/components/DeliveredList';
-
-import { Container } from './styles';
 
 export default function Delivered({ data: id }) {
   const [deliveries, setDeliveries] = useState([]);
@@ -35,19 +33,15 @@ export default function Delivered({ data: id }) {
   }
 
   return (
-    <Container>
-
-      <FlatList
-        data={deliveries}
-        keyExtractor={item => String(item.id)}
-        showsVerticalScrollIndicator={false}
-        onEndReached={() => loadDelivered()}
-        onEndReachedThreshold={0.2}
-        renderItem={({ item }) => (
-            <DeliveredList data={item} />
-        )}
-      />
-
-    </Container>
+    <FlatList
+      data={deliveries}
+      keyExtractor={item => String(item.id)}
+      showsVerticalScrollIndicator={false}
+      onEndReached={() => loadDelivered()}
+      onEndReachedThreshold={0.2}
+      renderItem={({ item }) => (
+          <DeliveredList data={item} />
+      )}
+    />
   );
 }

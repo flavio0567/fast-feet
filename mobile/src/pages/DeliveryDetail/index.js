@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Button, Text } from 'react-native';
 
 import { Container } from './styles';
 
-export default function Detail() {
+export default function Detail({ navigation }) {
   return (
     <Container>
-      <Text>Detail</Text>
+
     </Container>
   );
 }

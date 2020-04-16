@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
 import { FlatList } from 'react-native';
-import api from '../../services/api';
+import api from '~/services/api';
 
 import DeliveryList from '~/components/DeliveryList';
 
@@ -35,13 +34,8 @@ export default function Delivery({ data: id }) {
     setLoading(false);
   }
 
-  // function navigateToDetail(deliveries) {
-  //   navigation.navigate('Detail', { deliveries });
-  // }
-
   return (
     <Container>
-
       <FlatList
         data={deliveries}
         keyExtractor={item => String(item.id)}
@@ -52,7 +46,6 @@ export default function Delivery({ data: id }) {
             <DeliveryList data={item} />
         )}
       />
-
     </Container>
   );
 }

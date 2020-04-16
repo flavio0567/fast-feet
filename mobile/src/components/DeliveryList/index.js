@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View, Image } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,6 +19,7 @@ import {
 } from './styles';
 
 export default function DeliveryList({ data }) {
+  const navigation = useNavigation();
 
   return (
     <Container>
@@ -49,7 +51,7 @@ export default function DeliveryList({ data }) {
         <PointText>{data.recipient.user.cidade}</PointText>
         </View>
 
-        <TouchableOpacity onPress={() => {} }>
+        <TouchableOpacity onPress={() => navigation.navigate('DeliveryDetail', { data }) }>
         <DetailText>Ver detalhes</DetailText>
         </TouchableOpacity>
       </SelectDetail>
@@ -58,13 +60,3 @@ export default function DeliveryList({ data }) {
   );
 }
 
-DeliveryList.navigationOptions = ({ navigation }) => ({
-  title: 'Detalhes da encomenda',
-  DetailText: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('Detail');
-      }}
-    >Ver detalhes</TouchableOpacity>
-  ),
-});

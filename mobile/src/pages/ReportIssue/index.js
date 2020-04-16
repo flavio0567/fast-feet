@@ -3,10 +3,10 @@ import { Text } from 'react-native';
 
 import { Container } from './styles';
 
-export default function Profile() {
+export default function ReportIssue() {
   return (
     <Container>
-      <Text>Profile</Text>
+      <Text>ReportIssue</Text>
     </Container>
   );
 }
