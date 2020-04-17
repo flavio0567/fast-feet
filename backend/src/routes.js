@@ -33,6 +33,26 @@ routes.post('/sessions', Log, SessionStore, SessionController.store);
 routes.get('/deliveryman/:id/deliveries', Log, DeliverymanController.index);
 routes.get('/users', Log, UserController.index);
 
+/*
+ * Delivery problems
+ */
+routes.get('/delivery/:id/problems', Log, DeliveryProblemController.index);
+routes.post(
+  '/delivery/:id/problems',
+  Log,
+  DeliveryProblemStore,
+  DeliveryProblemController.store
+);
+routes.delete(
+  '/problem/:id/cancel-delivery',
+  Log,
+  DeliveryProblemController.delete
+);
+/*
+ * Delivery udpate signature after delivered
+ */
+routes.put('/delivery/:id', Log, DeliveryUpdate, DeliveryController.update);
+
 routes.use(authMiddleware);
 /*
  * Admin actions
@@ -64,24 +84,6 @@ routes.delete(
  */
 routes.get('/delivery', Log, DeliveryController.index);
 routes.post('/delivery', Log, DeliveryStore, DeliveryController.store);
-routes.put('/delivery/:id', Log, DeliveryUpdate, DeliveryController.update);
-
-/*
- * Delivery problems
- */
-routes.get('/delivery/:id/problems', Log, DeliveryProblemController.index);
-routes.post(
-  '/delivery/:id/problems',
-  Log,
-  DeliveryProblemStore,
-  DeliveryProblemController.store
-);
-routes.delete(
-  '/problem/:id/cancel-delivery',
-  Log,
-  DeliveryProblemController.delete
-);
-
 /*
  * Files: Avatar, Signature
  */

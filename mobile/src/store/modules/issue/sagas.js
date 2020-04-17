@@ -6,9 +6,10 @@ import api from '~/services/api';
 import { reportIssueSuccess, reportIssueFailure } from './actions';
 
 export function* reportIssue({ payload }) {
+  console.tron.log('saga-issue ', payload)
   try {
-    const { id, description } = payload.data;
-    console.tron.log('saga-issue ', id, description)
+    const { id, description } = payload;
+    console.tron.log('saga-issue id, description ', id, description)
     const issue = Object.assign({
       description,
     });

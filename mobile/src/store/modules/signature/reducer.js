@@ -1,14 +1,14 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  issue: null,
+  signature: null,
 };
 
 export default function issue(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case '@issue/REPORT_ISSUE_SUCCESS':
+    case '@signature/SIGNATURE_SUCCESS':
       return produce(state, draft => {
-        draft.issue = action.payload.issue;
+        draft.signature = action.payload.delivery;
       });
       default:
         return state;

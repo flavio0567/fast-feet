@@ -32,7 +32,8 @@ export const SelectDetail = styled.View`
 `;
 
 export const LocaleText = styled.Text`
-  font-size: 10px;
+  font-size: 15px;
+  font-weight: bold;
   color: #9999;
 `;
 

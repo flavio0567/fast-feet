@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';;
 
-import TInput from '~/components/TInput';
 import Button from '~/components/Button';
 
 export const Container = styled.KeyboardAvoidingView.attrs({
@@ -20,19 +19,22 @@ export const Header = styled.View`
   height: 100%;
 `;
 
-export const Form = styled.View`
-  align-self: stretch;
-  margin-top: 50px;
+export const CameraView = styled.View`
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
-export const FormInput = styled(TInput)`
-  margin-bottom: 10px;
-  background: #FFF;
-  color: #6666;
+export const TakeView = styled.View`
+  flex: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  align-self: center;
+  margin: 20px;
 `;
 
-export const SubmitButton = styled(Button)`
-  margin-top: 10px;
-  background: #7159c1;
+export const LogoutButton = styled(Button)`
+  background: #7150c1;
   color: #FFF;
 `;

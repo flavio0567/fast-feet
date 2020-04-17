@@ -14,7 +14,7 @@ class DeliveryProblemController {
       const problems = await DeliveryProblem.findAndCountAll(
         {
           order: [['id', 'DESC']],
-          attributes: ['id', 'delivery_id', 'description'],
+          attributes: ['id', 'delivery_id', 'description', 'created_at'],
           limit: 5,
           offset: (page - 1) * 5,
         },
@@ -22,17 +22,19 @@ class DeliveryProblemController {
           where: { id },
         }
       );
+      res.header('X-Total-Count', problems.count);
 
       return res.json(problems);
     }
 
     /* req.query=!list : returns problems for an specific Delivery */
-    const deilveryProblems = await DeliveryProblem.findAll({
-      attributes: ['id', 'delivery_id', 'description'],
+    const deilveryProblems = await DeliveryProblem.findAndCountAll({
+      attributes: ['id', 'delivery_id', 'description', 'created_at'],
       limit: 5,
       offset: (page - 1) * 5,
       where: { delivery_id: id },
     });
+    res.header('X-Total-Count', deilveryProblems.count);
 
     return res.json(deilveryProblems);
   }
