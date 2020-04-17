@@ -5,29 +5,20 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
   behavior: 'padding',
 })`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+  margin-top: 0;
+  height: 20%;
+  background: #7159c1;
+  color: #FFF;
 `;
 
-export const IssueDescription = styled.Text`
+export const Header = styled.View`
+  margin-top: 80px;
+  padding: 0 30px;
+  height: 100%;
+`;
+
+export const TextSnap = styled.Text`
+  margin: 40px 60px;
   font-size: 20px;
-  color: #7159c1;
-  margin-top: 16px;
-  border: 1px solid;
-`;
-
-export const DetailLink = styled.TouchableOpacity`
-  background-color: #7159c1;
-  border-radius: 8px;
-  height: 50px;
-  width: 48%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const DetailText = styled.Text`
-  font-size: 15px;
-  color: #fff;
-  font-weight: bold;
+  color: #FFF;
 `;

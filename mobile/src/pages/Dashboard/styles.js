@@ -28,7 +28,7 @@ export const Avatar = styled.Image`
   width: 70px;
   height: 70px;
   background: #eee;
-  border-radius: 50px;
+  border-radius: 35px;
 `;
 
 export const Middle = styled.View`
@@ -39,7 +39,7 @@ export const Middle = styled.View`
 `;
 
 export const Name = styled.Text`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
@@ -57,13 +57,13 @@ export const SelectOption = styled.View`
 `;
 
 export const TextLine = styled.Text`
-  margin-top: 20px;
+  margin-top: 22px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 export const SignLink = styled.TouchableOpacity`
-  margin-top: 30px;
+  margin-top: 26px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -73,7 +73,7 @@ export const DeliveryText = styled.Text`
   color: #7159c1;
   font-weight: bold;
   font-size: 14px;
-  margin-left: 90px;
+  margin-left: 50px;
 
   opacity: ${props => ((props.activyOpacity !== false) ? 0.6 : 1)};
   text-decoration: ${props => ((props.activyOpacity === false) ? "underline #7159c1" : null)};

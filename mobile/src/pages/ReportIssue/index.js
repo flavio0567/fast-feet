@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { reportIssueRequest } from '~/store/modules/issue/actions';
 
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import { Container, Header, Form, FormInput, SubmitButton } from './styles';
 
 export default function ReportIssue({ route }) {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ export default function ReportIssue({ route }) {
 
   return (
     <Container>
+      <Header>
         <Form>
           <FormInput
             editable
@@ -37,7 +38,8 @@ export default function ReportIssue({ route }) {
             onPress={handleSubmit}>
             Enviar
           </SubmitButton>
-      </Form>
+        </Form>
+      </Header>
     </Container>
   )
 }
