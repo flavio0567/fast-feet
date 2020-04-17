@@ -25,10 +25,8 @@ function NewStack() {
       initialRouteName="Dashboard"
       screenOptions={{
         headerTransparent: true,
-        headerLeftContainerStyle: {
-          marginLeft: 20,
-        },
       }}
+      headerMode= "none"
     >
       <Tabs.Screen
         name="Dashboard"
@@ -45,10 +43,11 @@ function NewStack() {
                 navigation.goBack();
               }}
             >
-              <Icon name="chevron-left" size={20} color="#FFF" />
+              <Icon name="chevron-left" size={20} color="#6666" />
             </TouchableOpacity>
           ),
         }}
+        style={{ position: 'absolute', backgroundColor: '#7159c1'}}
       />
       <Stack.Screen
         name="ReportIssue"
@@ -83,7 +82,7 @@ function NewStack() {
         }}
       />
       <Stack.Screen
-        name="Confirmar entrega"
+        name="ConfirmDelivery"
         component={ConfirmDelivery}
         options={{
           title: 'Confirmar entrega',
