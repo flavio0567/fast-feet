@@ -53,16 +53,16 @@ class DeliverymanController {
     /*
      *  retornar um Deliveryman específico
      */
-    deliveryman = await User.findAll({
+    deliveryman = await User.findAndCountAll({
       where: {
         deliveryman: true,
-        id,
       },
       limit: 5,
       offset: (page - 1) * 5,
     });
+    res.header('X-Total-Count', deliveryman.count);
 
-    return res.json(deliveryman);
+    return res.json(deliveryman.rows);
   }
 
   async store(req, res) {

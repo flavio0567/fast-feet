@@ -12,11 +12,11 @@ import DeliveryController from './app/controllers/DeliveryController';
 import AvatarController from './app/controllers/AvatarController';
 import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 import SignatureController from './app/controllers/SignatureController';
+import ProblemController from './app/controllers/ProblemController';
 
 import Log from './app/middlewares/Log';
 import SessionStore from './app/middlewares/validators/SessionStore';
-// import UserStore from './app/middlewares/validators/UserStore';
-// import UserUpdate from './app/middlewares/validators/UserUpdate';
+
 import DeliveryStore from './app/middlewares/validators/DeliveryStore';
 import DeliveryUpdate from './app/middlewares/validators/DeliveryUpdate';
 import RecipientStore from './app/middlewares/validators/RecipientStore';
@@ -36,6 +36,7 @@ routes.get('/users', Log, UserController.index);
 /*
  * Delivery problems
  */
+routes.get('/problems', Log, ProblemController.index);
 routes.get('/delivery/:id/problems', Log, DeliveryProblemController.index);
 routes.post(
   '/delivery/:id/problems',
@@ -65,6 +66,7 @@ routes.post('/recipients', Log, RecipientStore, RecipientController.store);
 /*
  * Deliverymen
  */
+routes.get('/deliveryman', Log, DeliverymanController.index);
 routes.post('/deliveryman', Log, DeliverymanStore, DeliverymanController.store);
 routes.put(
   '/deliveryman/:id',
