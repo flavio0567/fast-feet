@@ -2,10 +2,8 @@ import React from 'react';
 
 // import { Container } from './styles';
 
-export default function Recipient() {
+export default function DeliveryProblem() {
   return (
-    <div>
-      <h1>Recipient</h1>
-    </div>
+    <div />
   );
 }

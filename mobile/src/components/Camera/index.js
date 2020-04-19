@@ -7,6 +7,7 @@ const RNFetchBlob = require('rn-fetch-blob');
 import { Container, Header, CameraView, TakeView, LogoutButton } from './styles';
 
 export default class Camera extends Component {
+
   render() {
     return (
     <Container>

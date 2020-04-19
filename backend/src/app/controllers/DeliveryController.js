@@ -1,6 +1,8 @@
 import { Op } from 'sequelize';
 
 import Delivery from '../models/Delivery';
+import Recipient from '../models/Recipient';
+import User from '../models/User';
 
 import SendEmailToDeliverymanService from '../services/SendEmailToDeliverymanService';
 
@@ -9,7 +11,7 @@ class DeliveryController {
     const { q } = req.query;
 
     if (q) {
-      const deliveryProducts = await Delivery.findAll({
+      const deliveryProducts = await Delivery.findAndCountAll({
         where: {
           product: {
             [Op.iLike]: `%${q}%`,
@@ -20,9 +22,27 @@ class DeliveryController {
       return res.json(deliveryProducts);
     }
 
-    const deliveries = await Delivery.findAll();
+    const deliveries = await Delivery.findAndCountAll({
+      include: [
+        {
+          model: User,
+          as: 'recipient',
+          include: [
+            {
+              model: Recipient,
+              as: 'user',
+            },
+          ],
+        },
+        {
+          model: User,
+          as: 'deliveryman',
+        },
+      ],
+    });
+    res.header('X-Total-Count', deliveries.count);
 
-    return res.json(deliveries);
+    return res.json(deliveries.rows);
   }
 
   async store(req, res) {

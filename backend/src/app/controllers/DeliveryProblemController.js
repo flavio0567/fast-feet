@@ -13,13 +13,13 @@ class DeliveryProblemController {
     if (list) {
       const problems = await DeliveryProblem.findAndCountAll(
         {
-          order: [['id', 'DESC']],
           attributes: ['id', 'delivery_id', 'description', 'created_at'],
           limit: 5,
           offset: (page - 1) * 5,
         },
         {
           where: { id },
+          order: [['id', 'DESC']],
         }
       );
       res.header('X-Total-Count', problems.count);
@@ -30,6 +30,7 @@ class DeliveryProblemController {
     /* req.query=!list : returns problems for an specific Delivery */
     const deilveryProblems = await DeliveryProblem.findAndCountAll({
       attributes: ['id', 'delivery_id', 'description', 'created_at'],
+      order: [['id', 'ASC']],
       limit: 5,
       offset: (page - 1) * 5,
       where: { delivery_id: id },
