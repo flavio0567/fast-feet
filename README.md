@@ -9,6 +9,8 @@
 - react-native run-ios ( it wasn't tested for Android )
 ---
 
+* before start, install all dependencies !
+
 🚀 **amazing app from rocketseat**
 
 
