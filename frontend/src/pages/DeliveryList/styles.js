@@ -27,6 +27,11 @@ export const Container = styled.div`
       font-size: 10px;
       font-weight: bold;
     }
+
+    input {
+      width: 200px;
+    }
+
   }
 
   ul {

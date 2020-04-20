@@ -12,7 +12,7 @@ export default function DeliveryProblemList() {
   useEffect(() => {
     async function loadIssues() {
       const response = await api.get('problems');
-      console.tron.log(response.data);
+
       setIssues(response.data);
     }
 
@@ -35,10 +35,10 @@ export default function DeliveryProblemList() {
 
       <div className="container">
         <div className="row">
-          <div className="col-lg-1">
+          <div className="col-lg-3">
             <h3>Encomenda</h3>
           </div>
-          <div className="col-lg-2">
+          <div className="col-lg-6">
             <h3>Problema</h3>
           </div>
           <div className="col-lg-1">
@@ -52,11 +52,11 @@ export default function DeliveryProblemList() {
           <div className="container">
             <div className="row">
               <li key={issue.id}>
-                <div className="col-lg-1">
+                <div className="col-lg-2">
                   <span>#{issue.id} </span>
                 </div>
 
-                <div className="col-lg-3">
+                <div className="col-lg-8">
                   <span>{issue.description} </span>
                 </div>
 

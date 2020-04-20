@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MdMoreHoriz, MdDelete, MdEdit } from 'react-icons/md';
+import { MdAdd, MdMoreHoriz, MdDelete, MdEdit } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import api from '~/services/api';
 
@@ -8,29 +9,49 @@ import { Container, Badge, NotificationList } from './styles';
 export default function DeliverymanList() {
   const [visible, setVisible] = useState(false);
   const [deliverymen, setDeliverymen] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     async function loadIssues() {
       const response = await api.get(`deliveryman`);
-      console.tron.log(response.data);
+
       setDeliverymen(response.data);
     }
 
     loadIssues();
   }, []);
 
-  // function handleAddNewDelivery() {
-
-  // }
-
   function handleToggleVisible() {
     setVisible(!visible);
   }
 
+  function handleInputChange(e) {
+    setSearch(e.target.value);
+  }
+
+  // eslint-disable-next-line prefer-const
+  let filtereDeliverymen = deliverymen.filter((deliveryman) => {
+    return deliveryman.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  });
+
   return (
     <Container>
       <header>
-        <strong>Problemas na entrega</strong>
+        <strong>Gerenciando entregadores</strong>
+        <aside>
+          <input
+            type="text"
+            placeholder="Buscar por entregador"
+            value={search}
+            onChange={handleInputChange}
+          />
+        </aside>
+        <Badge>
+          <Link to="/deliveryman" style={{ color: '#7159c1' }}>
+            <MdAdd color="#FFF" size={20} />
+            <p>CADASTRAR</p>
+          </Link>
+        </Badge>
       </header>
 
       <div className="container">
@@ -54,7 +75,7 @@ export default function DeliverymanList() {
       </div>
 
       <ul>
-        {deliverymen.map((deliveryman) => (
+        {filtereDeliverymen.map((deliveryman) => (
           <div className="container">
             <div className="row">
               <li key={deliveryman.id}>

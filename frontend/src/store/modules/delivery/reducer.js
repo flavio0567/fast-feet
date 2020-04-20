@@ -11,6 +11,14 @@ export default function delivery(state = INITIAL_STATE, action) {
         draft.delivery = action.payload.delivery;
         break;
       }
+      case '@delivery/DELIVERY_EDIT_SUCCESS': {
+        draft.delivery = action.payload.delivery;
+        break;
+      }
+      case '@delivery/DELIVERY_DELETE_SUCCESS': {
+        draft.delivery = action.payload.delivery;
+        break;
+      }
       default:
     }
   });

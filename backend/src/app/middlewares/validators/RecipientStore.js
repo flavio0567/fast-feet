@@ -5,6 +5,7 @@ module.exports = async (req, res, next) => {
     name: Joi.string().required(),
     rua: Joi.string().required(),
     numero: Joi.number().required(),
+    complemento: Joi.string(),
     estado: Joi.string().required(),
     cidade: Joi.string().required(),
     cep: Joi.string().required(),

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MdMoreHoriz, MdDelete, MdEdit } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import { MdAdd, MdMoreHoriz, MdDelete, MdEdit } from 'react-icons/md';
 
 import api from '~/services/api';
 
@@ -8,16 +9,29 @@ import { Container, Badge, NotificationList } from './styles';
 export default function RecipientList() {
   const [visible, setVisible] = useState(false);
   const [recipients, setRecipients] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     async function loadRecipients() {
       const response = await api.get('recipients');
-      console.tron.log(response.data);
+
       setRecipients(response.data);
     }
 
     loadRecipients();
   }, []);
+
+  function handleInputChange(e) {
+    setSearch(e.target.value);
+  }
+
+  // eslint-disable-next-line prefer-const
+  let filtereRecipients = recipients.filter((recipient) => {
+    return (
+      recipient.recipient.name.toLowerCase().indexOf(search.toLowerCase()) !==
+      -1
+    );
+  });
 
   function handleToggleVisible() {
     setVisible(!visible);
@@ -26,7 +40,21 @@ export default function RecipientList() {
   return (
     <Container>
       <header>
-        <strong>Problemas na entrega</strong>
+        <strong>Gerenciamento destinatário</strong>
+        <aside>
+          <input
+            type="text"
+            placeholder="Buscar por destinatário"
+            value={search}
+            onChange={handleInputChange}
+          />
+        </aside>
+        <Badge>
+          <Link to="/recipient" style={{ color: '#7159c1' }}>
+            <MdAdd color="#FFF" size={20} />
+            <p>CADASTRAR</p>
+          </Link>
+        </Badge>
       </header>
 
       <div className="container">
@@ -47,7 +75,7 @@ export default function RecipientList() {
       </div>
 
       <ul>
-        {recipients.map((recipient) => (
+        {filtereRecipients.map((recipient) => (
           <div className="container">
             <div className="row">
               <li key={recipient.id}>
