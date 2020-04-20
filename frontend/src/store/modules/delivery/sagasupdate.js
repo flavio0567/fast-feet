@@ -7,22 +7,22 @@ import api from '~/services/api';
 
 import { deliverySuccess, deliveryFailure } from './actions';
 
-export function* deliveryAdd({ payload }) {
+export function* deliveryEdit({ payload }) {
   try {
-    const { product } = payload.data;
+    const { id } = payload.data;
 
-    const delivery = { product, recipient_id: 10, deliveryman_id: 6 };
+    const response = yield call(api.put, `delivery/${id}`);
 
-    const response = yield call(api.post, 'delivery', delivery);
-
-    toast.success('Success, delivery created!');
+    toast.success('Success, delivery updated!');
 
     yield put(deliverySuccess(response.data));
     history.push('/deliveries');
   } catch (err) {
-    toast.error('Error saving deilvery, try again!');
+    toast.error('Error updating delivery, try again!');
     yield put(deliveryFailure());
   }
 }
 
-export default all([takeLatest('@delivery/DELIVERY_ADD_REQUEST', deliveryAdd)]);
+export default all([
+  takeLatest('@delivery/DELIVERY_EDIT_REQUEST', deliveryEdit),
+]);

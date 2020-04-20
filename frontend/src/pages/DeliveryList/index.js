@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdMoreHoriz, MdEdit, MdDelete, MdLooks } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-
-import { MdMoreHoriz, MdEdit, MdDelete, MdLooks, MdLoupe } from 'react-icons/md';
 
 import api from '~/services/api';
 
@@ -10,34 +8,44 @@ import { Container, Badge, NotificationList } from './styles';
 
 export default function DeliveryList() {
   const [visible, setVisible] = useState(false);
+
+  const [search, setSearch] = useState('');
+
   const [deliveries, setDeliveries] = useState([]);
 
   useEffect(() => {
     async function loadDelivery() {
       const response = await api.get('delivery');
-      console.tron.log('loadDelivery', response.data);
+
       setDeliveries(response.data);
     }
-
     loadDelivery();
   }, []);
-
-  // function handleAddNewDelivery() {
-
-  // }
 
   function handleToggleVisible() {
     setVisible(!visible);
   }
+
+  function handleInputChange(e) {
+    setSearch(e.target.value);
+  }
+
+  // eslint-disable-next-line prefer-const
+  let filtereDeliveries = deliveries.filter((delivery) => {
+    return String(delivery.id).indexOf(search) !== -1;
+  });
 
   return (
     <Container>
       <header>
         <strong>Gerenciando encomendas</strong>
         <aside>
-          <input type="text" placeholder="Buscar por entregador" />
-          <MdLoupe color="#999" />
-          <button>+</button>
+          <input
+            type="text"
+            placeholder="Buscar pelo nro da encomenda"
+            value={search}
+            onChange={handleInputChange}
+          />
         </aside>
         <Badge>
           <Link to="/delivery" style={{ color: '#7159c1' }}>
@@ -74,7 +82,7 @@ export default function DeliveryList() {
       </div>
 
       <ul>
-        {deliveries.map((delivery) => (
+        {filtereDeliveries.map((delivery) => (
           <div className="container">
             <div className="row">
               <li key={delivery.id}>

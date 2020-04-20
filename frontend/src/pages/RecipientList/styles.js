@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 export const Container = styled.div`
   max-width: 1080px;
@@ -11,6 +13,22 @@ export const Container = styled.div`
     display: flex;
     align-self: stretch;
     align-items: center;
+
+    button {
+      border: 0;
+      background: none;
+    }
+
+    strong {
+      font-size: 20px;
+      margin: 0 15px;
+    }
+
+    p {
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+    }
   }
 
   ul {
@@ -61,6 +79,21 @@ export const NotificationList = styled.div`
     border-right: 20px solid transparent;
     border-bottom: 20px solid rgba(255, 255, 255, 0.6);
   }
+
+  ${props =>
+    props.unread &&
+    css`
+      &::after {
+        content: '';
+        display: inline-block;
+        margin-left: 5px;
+        width: 8px;
+        height: 8px;
+        background: #ff892e;
+        border-radius: 50%;
+        margin-left: 10px;
+      }
+    `}
 
   span {
     display: block;

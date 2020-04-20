@@ -6,12 +6,11 @@ import { MdCheck } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 
 import AsyncSelect from 'react-select/lib/Async';
-import api from '~/services/api';
-import { Container, Badge, ButtonConfirm } from './styles';
 
-type State = {
-  inputValue: string,
-};
+import { deliveryAddRequest } from '~/store/modules/delivery/actions';
+
+import api from '~/services/api';
+import { Container, ButtonConfirm } from './styles';
 
 // import { deliveryAddRequest } from '~/store/modules/delivery/actions';
 
@@ -20,29 +19,52 @@ const schema = Yup.object().shape({
 });
 
 export default function Delivery() {
-  // const [deliveryman, setDeliveryman] = useState('');
-  const [recipients, setRecipients] = useState('');
-  // const [recipientSelected, setRecipientSelected] = useState('');
-  // const dispatch = useDispatch();
+  const [recipients, setRecipients] = useState([]);
+  const [selected, setSelected] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function loadRecipients() {
-      const response = await api.get('recipient');
-      console.tron.log('useEffect', response.data);
-      setRecipients(response.data.rows);
+      const response = await api.get('recipients');
+
+      for (const rec in response.data) {
+        // console.tron.log(response.data[rec].recipient);
+        setSelected(...selected, response.data[rec].recipient);
+      }
+      setRecipients(selected);
     }
     loadRecipients();
   }, []);
 
-  function handleInputChange(newValue) {
-    const inputValue = newValue.replace(/\W/g, '');
-    setRecipients({ inputValue });
-    return inputValue;
-  }
+  const filterRecipients = (inputValue) => {
+    return recipients.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
 
-  // function handleSubmit({ recipient_id, deliveryman_id, product }) {
-  //   dispatch(deliveryAddRequest(recipient_id, deliveryman_id, product));
-  // }
+  const promiseOptionsRecipient = (inputValue) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(filterRecipients(inputValue));
+      }, 1000);
+    });
+
+  const filterDeliveryman = (inputValue) => {
+    return recipients.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
+  const promiseOptionsDeliveryman = (inputValue) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(filterDeliveryman(inputValue));
+      }, 1000);
+    });
+
+  function handleDelivery(data) {
+    dispatch(deliveryAddRequest(data));
+  }
 
   return (
     <Container>
@@ -51,25 +73,29 @@ export default function Delivery() {
       </header>
 
       <div>
-        <strong>Destinatário</strong>
-        <AsyncSelect
-          cacheOptions
-          loadOptions={recipients}
-          defaultOptions
-          onInputChange={handleInputChange}
-        />
-
-        <Form schema={schema} onSubmit={() => {}}>
+        <Form schema={schema} onSubmit={handleDelivery}>
+          <strong>Destinatário</strong>
+          <AsyncSelect
+            cacheOptions
+            defaultOptions
+            loadOptions={promiseOptionsRecipient}
+          />
+          <strong>Entregador</strong>
+          <AsyncSelect
+            cacheOptions
+            defaultOptions
+            loadOptions={promiseOptionsDeliveryman}
+          />
+          <strong>Nome do produto</strong>
           <Input name="product" placeholder="Descrição do produto" />
           <Link to="/deliveries" style={{ color: '#FFF', background: '#666' }}>
-            voltar
+            VOLTAR
           </Link>
-          {/* <Badge> */}
+
           <ButtonConfirm>
             <MdCheck color="#FFFF" size={20} />
             <p>SALVAR</p>
           </ButtonConfirm>
-          {/* </Badge> */}
         </Form>
       </div>
     </Container>

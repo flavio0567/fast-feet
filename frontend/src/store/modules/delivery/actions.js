@@ -1,19 +1,39 @@
 export function deliveryAddRequest(data) {
   return {
-    type: '@deilvery/DELIVERY_ADD_REQUEST',
+    type: '@delivery/DELIVERY_ADD_REQUEST',
     payload: { data },
   };
 }
 
-export function deliveryAddSuccess(delivery) {
+export function deliveryEditRequest(data) {
   return {
-    type: '@deilvery/DELIVERY_ADD_SUCCESS',
+    type: '@delivery/DELIVERY_EDIT_SUCCESS',
+    payload: { data },
+  };
+}
+
+export function deliveryDeleteRequest(data) {
+  return {
+    type: '@delivery/DELIVERY_DELETE_REQUEST',
+    payload: { data },
+  };
+}
+
+export function deliverySuccess(delivery) {
+  return {
+    type: '@delivery/DELIVERY_SUCCESS',
     payload: { delivery },
   };
 }
 
-export function deliveryAddFailure() {
+export function deliveryDeleteSuccess() {
   return {
-    type: '@deilvery/DELIVERY_ADD_FAILURE',
+    type: '@delivery/DELIVERY_DELETE_SUCCESS',
+  };
+}
+
+export function deliveryFailure() {
+  return {
+    type: '@delivery/DELIVERY_FAILURE',
   };
 }
