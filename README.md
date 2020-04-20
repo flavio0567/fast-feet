@@ -10,6 +10,7 @@
 ---
 
 * before start, install all dependencies !
+* Read issue for more information about the features !
 
 🚀 **amazing app from rocketseat**
 
